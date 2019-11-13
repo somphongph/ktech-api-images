@@ -30,6 +30,8 @@ msbuild.wrn
 
 # Visual Studio 2015
 .vs/
+.sonarlint
+appsettings.json
 
 
 resources/
