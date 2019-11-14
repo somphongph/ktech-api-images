@@ -6,7 +6,7 @@ using apiuploads.Models;
 
 namespace apiuploads.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("v1/[controller]")]
     [ApiController]
     public class DownloadsController : Controller
     {
