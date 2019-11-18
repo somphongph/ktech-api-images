@@ -18,7 +18,8 @@ namespace apiuploads.Controllers
         {
             try
             {
-                string subFolder = "uploads";
+                string subFolder = Request.Host.Host.ToString();
+                
                 string currentYear = DateTime.Now.Year.ToString();
                 string currentMonth = DateTime.Now.Month.ToString().PadLeft(2, '0');
                 string folderName = Path.Combine("resources", subFolder, currentYear, currentMonth);

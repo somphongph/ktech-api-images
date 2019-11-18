@@ -18,8 +18,10 @@ namespace apiuploads.Controllers
             // var path = Path.Combine("resources", "uploads", "2019", "03", fileLocation);
             // string xx = imageDownload.storeName+".jpg";
 
+            string subFolder = Request.Host.Host.ToString();
+
             string fileLocation = Path.Combine(imageDownload.year, imageDownload.month, imageDownload.storeName);
-            string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "resources", "uploads", fileLocation);
+            string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "resources", subFolder, fileLocation);
 
             var memory = new MemoryStream();
             using (var stream = new FileStream(uploadPath, FileMode.Open))
