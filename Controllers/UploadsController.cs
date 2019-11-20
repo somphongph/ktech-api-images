@@ -4,10 +4,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-using apiuploads.Models;
+using api.images.Models;
 
 
-namespace apiuploads.Controllers
+namespace api.images.Controllers
 {
     [Route("v1/[controller]")]
     public class UploadsController : Controller

@@ -1,4 +1,4 @@
-namespace apiuploads.Models
+namespace api.images.Models
 {
     public class ProfileImage
     {

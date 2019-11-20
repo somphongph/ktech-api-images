@@ -3,16 +3,16 @@ WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
 WORKDIR /src
-COPY tripdini.images/tripdini.images.csproj tripdini.images/
-RUN dotnet restore tripdini.images/tripdini.images.csproj
+COPY api.images/api.images.csproj api.images/
+RUN dotnet restore api.images/api.images.csproj
 COPY . .
-WORKDIR /src/tripdini.images
-RUN dotnet build tripdini.images.csproj -c Release -o /app
+WORKDIR /src/api.images
+RUN dotnet build api.images.csproj -c Release -o /app
 
 FROM build AS publish
-RUN dotnet publish tripdini.images.csproj -c Release -o /app
+RUN dotnet publish api.images.csproj -c Release -o /app
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "tripdini.images.dll"]
+ENTRYPOINT ["dotnet", "api.images.dll"]
