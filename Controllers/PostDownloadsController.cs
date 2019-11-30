@@ -14,15 +14,37 @@ namespace api.images.Controllers
         [HttpGet]
         public async Task<IActionResult> DownloadFile([FromQuery]ImageDownload imageDownload)
         {
+            string folderSize = "";
+            switch (imageDownload.size) {
+                case "sm":
+                    folderSize = "150";
+                    break;
 
-            // if (fileLocation == null) return BadRequest();
-            // var fileDescription = _fileRepository.GetFileDescription(id);
-            // var path = Path.Combine("resources", "uploads", "2019", "03", fileLocation);
-            // string xx = imageDownload.storeName+".jpg";
+                case "md":
+                    folderSize = "300";
+                    break;
+
+                case "lg":
+                    folderSize = "600";
+                    break;
+
+                case "xs":
+                    folderSize = "75";
+                    break;
+
+                case "xl":
+                    folderSize = "1920";
+                    break;
+
+                default:
+                    folderSize = "1920";
+                    break;
+
+            }
 
             string subFolder = Request.Host.Host.ToString() + ".posts";
 
-            string fileLocation = Path.Combine(imageDownload.year, imageDownload.month, imageDownload.size, imageDownload.storeName);
+            string fileLocation = Path.Combine(imageDownload.year, imageDownload.month, folderSize, imageDownload.storeName);
             string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "resources", subFolder, fileLocation);
 
             var memory = new MemoryStream();

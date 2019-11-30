@@ -14,7 +14,7 @@ namespace api.images.Controllers
     {
         [HttpPost]
         [DisableRequestSizeLimit]
-        public ActionResult UploadFile(IFormFile file)
+        public async Task<ActionResult> UploadFile(IFormFile file)
         {
             try
             {
@@ -56,7 +56,7 @@ namespace api.images.Controllers
                             var data = scaledImage.Encode();
                             byte[] fileResize = data.ToArray();
 
-                            fs.Write(fileResize, 0, fileResize.Length);
+                            await fs.WriteAsync(fileResize, 0, fileResize.Length);
                         }
                     }                    
 
