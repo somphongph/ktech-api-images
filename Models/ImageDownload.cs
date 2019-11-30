@@ -6,5 +6,6 @@ namespace api.images.Models
         public string contentType { get; set; }
         public string year { get; set; }
         public string month { get; set; }
+        public string size { get; set; }
     }
 }

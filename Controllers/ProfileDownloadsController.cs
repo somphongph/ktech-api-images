@@ -5,7 +5,7 @@ using api.images.Models;
 
 namespace api.images.Controllers
 {
-    [Route("v1/[controller]")]
+    [Route("v1/profile-downloads")]
     [ApiController]
     public class ProfileDownloadsController : Controller
     {
