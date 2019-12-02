@@ -19,7 +19,7 @@ namespace api.images.Controllers
             try
             {
                 string subFolder =  Request.Host.Host.ToString() + ".profiles";
-                string folderName = Path.Combine("../resources", subFolder);
+                string folderName = Path.Combine("resources", subFolder);
                 string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
                 if ( ! Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);
 
