@@ -5,7 +5,7 @@ RUN apt-get install -y libfontconfig1
 
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-bionic AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
 WORKDIR /src
 COPY api.images/api.images.csproj api.images/
 RUN dotnet restore api.images/api.images.csproj
