@@ -23,7 +23,7 @@ namespace api.images.Controllers
                 
                 string currentYear = DateTime.Now.Year.ToString();
                 string currentMonth = DateTime.Now.Month.ToString().PadLeft(2, '0');
-                string folderName = Path.Combine("./resources", subFolder, currentYear, currentMonth);
+                string folderName = Path.Combine("../resources", subFolder, currentYear, currentMonth);
                 string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
 
                 if (file.Length > 0) {
