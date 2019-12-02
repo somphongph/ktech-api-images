@@ -18,7 +18,7 @@ namespace api.images.Controllers
             // string xx = imageDownload.storeName+".jpg";
             string subFolder =  Request.Host.Host.ToString() + ".profiles";
 
-            string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "./resources", subFolder, profileImage.storeName);
+            string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "resources", subFolder, profileImage.storeName);
 
             var memory = new MemoryStream();
             using (var stream = new FileStream(uploadPath, FileMode.Open))
