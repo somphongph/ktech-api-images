@@ -1,4 +1,8 @@
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-alpine AS base
+RUN apt-get update 
+RUN apt-get install -y libfreetype6 
+RUN apt-get install -y libfontconfig1
+
 WORKDIR /app
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
