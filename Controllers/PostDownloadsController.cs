@@ -45,7 +45,7 @@ namespace api.images.Controllers
             string subFolder = Request.Host.Host.ToString() + ".posts";
 
             string fileLocation = Path.Combine(imageDownload.year, imageDownload.month, folderSize, imageDownload.storeName);
-            string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "./resources", subFolder, fileLocation);
+            string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "resources", subFolder, fileLocation);
 
             var memory = new MemoryStream();
             using (var stream = new FileStream(uploadPath, FileMode.Open))
