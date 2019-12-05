@@ -1,11 +1,11 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0-bionic AS base
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic AS base
 RUN apt-get update 
 RUN apt-get install -y libfreetype6 
 RUN apt-get install -y libfontconfig1
 
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
 WORKDIR /src
 COPY api.images/api.images.csproj api.images/
 RUN dotnet restore api.images/api.images.csproj
