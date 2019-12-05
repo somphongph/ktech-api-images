@@ -16,12 +16,14 @@ namespace api.images.Controllers
             // var fileDescription = _fileRepository.GetFileDescription(id);
             // var path = Path.Combine("resources", "uploads", "2019", "03", fileLocation);
             // string xx = imageDownload.storeName+".jpg";
-            string subFolder =  Request.Host.Host.ToString() + ".profiles";
-
-            string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "resources", subFolder, profileImage.storeName);
+            string folder =  Request.Host.Host.ToString();
+            string subFolder =  "profiles";
+            string folderName = Path.Combine("resources", folder, subFolder);
+            
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), folderName, profileImage.storeName);
 
             var memory = new MemoryStream();
-            using (var stream = new FileStream(uploadPath, FileMode.Open))
+            using (var stream = new FileStream(filePath, FileMode.Open))
             {
                 await stream.CopyToAsync(memory);
             }

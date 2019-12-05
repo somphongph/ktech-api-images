@@ -18,14 +18,16 @@ namespace api.images.Controllers
         {
             try
             {
-                string subFolder =  Request.Host.Host.ToString() + ".profiles";
-                string folderName = Path.Combine("resources", subFolder);
-                string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
-                if ( ! Directory.Exists(uploadPath)) Directory.CreateDirectory(uploadPath);
+                string folder =  Request.Host.Host.ToString();
+                string subFolder =  "profiles";
+                string folderName = Path.Combine("resources", folder, subFolder);
+                
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                if ( ! Directory.Exists(filePath)) Directory.CreateDirectory(filePath);
 
                 if (file.Length > 0){
                     string storeName = Guid.NewGuid().ToString("N");
-                    string fullPath = Path.Combine(uploadPath, storeName);
+                    string fullPath = Path.Combine(filePath, storeName);
                     using (var stream = new FileStream(fullPath, FileMode.Create))
                     {
                         await file.CopyToAsync(stream);

@@ -42,13 +42,15 @@ namespace api.images.Controllers
 
             }
 
-            string subFolder = Request.Host.Host.ToString() + ".posts";
+            string folder = Request.Host.Host.ToString();
+            string subFolder =  "posts";
+            string folderName = Path.Combine("resources", folder, subFolder);
 
             string fileLocation = Path.Combine(imageDownload.year, imageDownload.month, folderSize, imageDownload.storeName);
-            string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), "resources", subFolder, fileLocation);
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), folderName, fileLocation);
 
             var memory = new MemoryStream();
-            using (var stream = new FileStream(uploadPath, FileMode.Open))
+            using (var stream = new FileStream(filePath, FileMode.Open))
             {
                 await stream.CopyToAsync(memory);
             }

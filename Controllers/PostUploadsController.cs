@@ -18,13 +18,15 @@ namespace api.images.Controllers
         {
             try
             {
-                int[] dimensionWidth = {75, 150, 300, 600, 1920};
-                string subFolder = Request.Host.Host.ToString() + ".posts";                
+                int[] dimensionWidth = {75, 150, 300, 600, 1920};    
+
+                string folder = Request.Host.Host.ToString();
+                string subFolder =  "posts";
+                string folderName = Path.Combine("resources", folder, subFolder);     
                 
                 string currentYear = DateTime.Now.Year.ToString();
                 string currentMonth = DateTime.Now.Month.ToString().PadLeft(2, '0');
-                string folderName = Path.Combine("resources", subFolder, currentYear, currentMonth);
-                string uploadPath = Path.Combine(Directory.GetCurrentDirectory(), folderName);
+                string filePath = Path.Combine(Directory.GetCurrentDirectory(), folderName, currentYear, currentMonth);
 
                 if (file.Length > 0) {
                     string storeName = Guid.NewGuid().ToString("N");                   
@@ -38,7 +40,7 @@ namespace api.images.Controllers
                     float ratio =   (float)sourceBitmap.Width / (float)sourceBitmap.Height;                        
 
                     foreach (int width in dimensionWidth) { 
-                        string path = Path.Combine(uploadPath, width.ToString());
+                        string path = Path.Combine(filePath, width.ToString());
                         if ( ! Directory.Exists(path)) {
                             Directory.CreateDirectory(path);
                         }
