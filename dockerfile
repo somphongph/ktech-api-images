@@ -1,22 +1,16 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-bionic AS base
-RUN apt-get update 
-RUN apt-get install -y libfreetype6 
-RUN apt-get install -y libfontconfig1
-
+FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build-env
 WORKDIR /app
 
-FROM mcr.microsoft.com/dotnet/core/sdk:3.1-alpine AS build
-WORKDIR /src
-COPY api.images/api.images.csproj api.images/
-RUN dotnet restore api.images/api.images.csproj
-COPY . .
-WORKDIR /src/api.images
-RUN dotnet build api.images.csproj -c Release -o /app
+# Copy csproj and restore as distinct layers
+COPY *.csproj ./
+RUN dotnet restore
 
-FROM build AS publish
-RUN dotnet publish api.images.csproj -c Release -o /app
+# Copy everything else and build
+COPY . ./
+RUN dotnet publish -c Release -o out
 
-FROM base AS final
+# Build runtime image
+FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-alpine
 WORKDIR /app
-COPY --from=publish /app .
-ENTRYPOINT ["dotnet", "api.images.dll"]
+COPY --from=build-env /app/out .
+ENTRYPOINT ["dotnet", "ktech-api-images.dll"]
