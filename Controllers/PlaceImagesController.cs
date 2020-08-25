@@ -139,7 +139,7 @@ namespace ktech.images.Controllers
                     }
                 }                    
 
-                var imageUrl = $"/places-images/{storeName}{Path.GetExtension(file.FileName).ToLowerInvariant()}";
+                var imageUrl = $"place-images/{storeName}{Path.GetExtension(file.FileName).ToLowerInvariant()}";
 
                 return Ok(imageUrl);
                 
