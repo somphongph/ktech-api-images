@@ -4,10 +4,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SkiaSharp;
+using ktech.images.Models;
 
-using api.images.Models;
-
-namespace api.images.Controllers
+namespace ktech.images.Controllers
 {
     [Route("v1/post-uploads")]
     public class PostUploadsController : Controller

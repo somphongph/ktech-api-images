@@ -1,9 +1,9 @@
 using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
-using api.images.Models;
+using ktech.images.Models;
 
-namespace api.images.Controllers
+namespace ktech.images.Controllers
 {
     [Route("v1/profile-downloads")]
     [ApiController]

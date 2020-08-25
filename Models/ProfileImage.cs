@@ -1,4 +1,4 @@
-namespace api.images.Models
+namespace ktech.images.Models
 {
     public class ProfileImage
     {
