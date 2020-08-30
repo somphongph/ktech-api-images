@@ -22,14 +22,9 @@ namespace apifiles
         {
             services.AddControllers();
 
-            var allowedOrigins = Configuration.GetSection("CORS-Settings:Allow-Origins")
-                .Get<string[]>();
-
-            var allowedHeaders = Configuration.GetSection("CORS-Settings:Allow-Headers")
-                .Get<string[]>();
-
-            var allowedMethods = Configuration.GetSection("CORS-Settings:Allow-Methods")
-                .Get<string[]>();
+            var allowedOrigins = Configuration.GetSection("CORS-Settings:Allow-Origins").Get<string[]>();
+            var allowedHeaders = Configuration.GetSection("CORS-Settings:Allow-Headers").Get<string[]>();
+            var allowedMethods = Configuration.GetSection("CORS-Settings:Allow-Methods").Get<string[]>();
 
             services.AddCors(options =>
             {

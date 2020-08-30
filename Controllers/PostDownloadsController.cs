@@ -2,10 +2,9 @@ using System.IO;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 
-using api.images.Models;
-using System;
+using ktech.images.Models;
 
-namespace api.images.Controllers
+namespace ktech.images.Controllers
 {
     [Route("v1/post-downloads")]
     [ApiController]
@@ -37,7 +36,7 @@ namespace api.images.Controllers
                     break;
 
                 default:
-                    folderSize = "1920";
+                    folderSize = "150";
                     break;
 
             }
