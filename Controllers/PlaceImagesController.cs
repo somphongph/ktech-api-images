@@ -106,7 +106,7 @@ namespace ktech.images.Controllers
                 string folderName = Path.Combine("resources", folder, subFolder);     
                 
                 string filePath = Path.Combine(Directory.GetCurrentDirectory(), folderName);                
-                string storeName = Guid.NewGuid().ToString("N");                   
+                string storeName = Path.GetFileNameWithoutExtension(file.FileName) + "-" + Guid.NewGuid().ToString("N");                   
 
                 var memoryStream  = new MemoryStream();
                 file.CopyTo(memoryStream);                     
