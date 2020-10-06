@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Http;
 using System;
 using SkiaSharp;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ktech.images.Controllers
 {
@@ -15,37 +16,11 @@ namespace ktech.images.Controllers
         [HttpGet("{filename}")]
         public async Task<IActionResult> Download(string filename, [FromQuery]string size)
         {
-            if (filename == null) {
-                return NotFound();
-            }
+            if (filename == null) return NotFound();
 
-            string folderSize = "";
-            switch (size) {
-                case "xs":
-                    folderSize = "75";
-                    break;
+            string[] folderSize = { "xxs", "xs", "sm", "md", "lg", "xl"};
 
-                case "sm":
-                    folderSize = "150";
-                    break;
-
-                case "md":
-                    folderSize = "300";
-                    break;
-
-                case "lg":
-                    folderSize = "600";
-                    break;                
-
-                case "xl":
-                    folderSize = "1920";
-                    break;
-
-                default:
-                    folderSize = "150";
-                    break;
-
-            }
+            if (folderSize.Contains(size) == false )  return BadRequest();
 
             string filenameWithoutExtension = Path.GetFileNameWithoutExtension(filename);
 
@@ -53,7 +28,7 @@ namespace ktech.images.Controllers
             string subFolder =  "places";
             string folderName = Path.Combine("resources", folder, subFolder);
 
-            string filePath = Path.Combine(Directory.GetCurrentDirectory(), folderName, folderSize, filenameWithoutExtension);
+            string filePath = Path.Combine(Directory.GetCurrentDirectory(), folderName, size, filenameWithoutExtension);
 
             var memory = new MemoryStream();
             using (var stream = new FileStream(filePath, FileMode.Open))
@@ -99,7 +74,15 @@ namespace ktech.images.Controllers
 
             try
             {
-                int[] dimensionWidth = {75, 150, 300, 600, 1920};    
+                Dictionary<string, int> dimensionWidth = new Dictionary<string, int>()
+                {
+                    { "xxs", 10 }, 
+                    { "xs", 100 },
+                    { "sm", 200 },
+                    { "md", 400 },
+                    { "lg", 800 },
+                    { "xl", 1920 }
+                };
 
                 string folder = Request.Host.Host.ToString();
                 string subFolder =  "places";
@@ -116,15 +99,15 @@ namespace ktech.images.Controllers
                 var sourceBitmap = SKBitmap.Decode(ms);
                 float ratio =   (float)sourceBitmap.Width / (float)sourceBitmap.Height;                        
 
-                foreach (int width in dimensionWidth) { 
-                    string path = Path.Combine(filePath, width.ToString());
+                foreach (KeyValuePair<string, int> dimension in dimensionWidth) { 
+                    string path = Path.Combine(filePath, dimension.Key.ToString());
                     if ( ! Directory.Exists(path)) {
                         Directory.CreateDirectory(path);
                     }
 
                     string fullPath = Path.Combine(path, storeName);
                     using (var fs = new FileStream(fullPath, FileMode.Create, FileAccess.Write)) {
-                        int targetWidth = width;
+                        int targetWidth = dimension.Value;
                         int targetHeight =  (int)((float)targetWidth / ratio);
 
                         var skImageInfo = new SKImageInfo(targetWidth, targetHeight);
