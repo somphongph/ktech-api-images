@@ -78,9 +78,9 @@ namespace ktech.images.Controllers
                 {
                     { "xxs", 10 }, 
                     { "xs", 100 },
-                    { "sm", 200 },
-                    { "md", 400 },
-                    { "lg", 800 },
+                    { "sm", 300 },
+                    { "md", 600 },
+                    { "lg", 1024 },
                     { "xl", 1920 }
                 };
 
